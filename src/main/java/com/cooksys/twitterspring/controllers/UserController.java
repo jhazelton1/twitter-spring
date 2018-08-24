@@ -32,8 +32,9 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public User addUser(@RequestBody UserDto u) {
-		return this.uService.addUser(this.uMapper.fromDto(u));
+	public UserDto addUser(@RequestBody UserDto user) {
+		UserDto newUser = uService.addUser(user);
+		return newUser;
 	}
 
 }

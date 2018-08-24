@@ -5,9 +5,11 @@ import com.cooksys.twitterspring.entities.Profile;
 
 public class UserDto {
 	
-	Credentials credentials;
 	
-	Profile profile;
+	private Credentials credentials;
+	
+	private Profile profile;
+	
 	
 	public UserDto() {
 		
@@ -17,7 +19,7 @@ public class UserDto {
 		this.credentials = credentials;
 		this.profile = profile;
 	}
-
+	
 	public Credentials getCredentials() {
 		return credentials;
 	}
@@ -34,7 +36,5 @@ public class UserDto {
 		this.profile = profile;
 	}
 	
-	
-	
-
 }
+	

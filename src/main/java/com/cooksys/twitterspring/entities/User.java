@@ -3,37 +3,36 @@ package com.cooksys.twitterspring.entities;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-//import org.springframework.context.annotation.Profile;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "users")
 public class User {
 
+	@Transient
 	Date date = new Date();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 
-	@Column(name = "username")
-	private String username;
+	@Embedded
+	private Credentials credentials;
 
 	@Embedded
 	private Profile profile;
 
-	@Embedded
-	private Credentials credientials;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 
-	@Embedded
-	private final Timestamp joined = new Timestamp(date.getTime());
+	private Timestamp joined;
 
 	public User() {
 
@@ -42,7 +41,7 @@ public class User {
 	public User(Integer id, Profile profile, Credentials credentials) {
 		this.id = id;
 		this.profile = profile;
-		this.credientials = credentials;
+		this.credentials = credentials;
 	}
 
 	public Integer getId() {
@@ -62,13 +61,11 @@ public class User {
 	}
 
 	public Credentials getCredientials() {
-		return credientials;
+		return credentials;
 	}
 
-	public void setCredientials(Credentials credientials) {
-		this.credientials = credientials;
+	public void setCredientials(Credentials credentials) {
+		this.credentials = credentials;
 	}
-	
-	
 
 }

@@ -7,5 +7,7 @@ import com.cooksys.twitterspring.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+	
+	User findUserByCredentialsUserName(String username);
 
 }

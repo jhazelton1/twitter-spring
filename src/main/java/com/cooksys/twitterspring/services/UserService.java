@@ -2,6 +2,8 @@ package com.cooksys.twitterspring.services;
 
 import java.util.Collection;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.cooksys.twitterspring.dtos.UserDto;
@@ -24,8 +26,11 @@ public class UserService {
 		return this.uMapper.toDtos(this.uRepo.findAll());
 	}
 
-	public User addUser(User u) {
-		return this.uRepo.save(u);
+	@Transactional
+	public UserDto addUser(UserDto u) {
+		User entity = uMapper.fromDto(u);
+		uRepo.save(entity);
+		return u;
 	}
 	
 }
